@@ -1,0 +1,27 @@
+
+{
+  "name": "superhero-fx",
+  "version": "0.1.0",
+  "description": "Bring your website to life, one swing at a time.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "superhero",
+    "animation",
+    "gsap",
+    "javascript",
+    "web-animation"
+  ],
+  "author": "Rahul Ubale",
+  "license": "MIT",
+  
+  "devDependencies": {
+    "vite": "^8.3.8"
+  }
+}
+
+

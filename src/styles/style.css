@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: linear-gradient(135deg, #17152e, #292653, #42316b);
+}
+
+#app {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.sfx-character {
+    position: absolute;
+    width: 180px;
+    height: 225px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sfx-character img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.sfx-tether {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sfx-character {
+    z-index: 2;
+}
