@@ -1,5 +1,5 @@
 
-export function createTether(app, hero) {
+export function createTether(app, hero, anchorX, anchorY) {
     // Create SVG container
     const svg = document.createElementNS(
         "http://www.w3.org/2000/svg",
@@ -8,6 +8,7 @@ export function createTether(app, hero) {
 
     svg.classList.add("sfx-tether");
 
+    // Create web path
     const web = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "path"
@@ -16,21 +17,26 @@ export function createTether(app, hero) {
     const width = app.clientWidth;
     const height = app.clientHeight;
 
-    // Fixed web anchor
-    const anchorX = width * 0.65;
-    const anchorY = height * 0.08;
+    // Set SVG dimensions
+    svg.setAttribute(
+        "viewBox",
+        `0 0 ${width} ${height}`
+    );
 
-    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.setAttribute("preserveAspectRatio", "none");
 
+    // Style web
     web.setAttribute("fill", "none");
     web.setAttribute("stroke", "#FFFFFF");
     web.setAttribute("stroke-width", "3");
     web.setAttribute("stroke-linecap", "round");
 
     svg.appendChild(web);
+
+    // Insert tether behind superhero
     app.insertBefore(svg, hero);
 
-    // Update web endpoint whenever the hero moves
+    // Update web whenever superhero moves
     function update(heroX, heroY) {
         const handX = heroX + 45;
         const handY = heroY - 20;
@@ -43,7 +49,9 @@ export function createTether(app, hero) {
 
     return {
         svg,
+
         update,
+
         destroy() {
             svg.remove();
         }
