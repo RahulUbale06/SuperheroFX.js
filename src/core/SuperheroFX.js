@@ -36,6 +36,15 @@ export class SuperheroFX {
         this.size = size;
         this.theme = resolveTheme(theme);
 
+        // Preserve the original container positioning
+        this.originalContainerPosition = container.style.position;
+        this.changedContainerPosition = false;
+
+        if (getComputedStyle(container).position === "static") {
+            container.style.position = "relative";
+            this.changedContainerPosition = true;
+        }
+
         // Animation and component references
         this.animation = null;
         this.resizeObserver = null;
@@ -46,6 +55,7 @@ export class SuperheroFX {
         this.swing = {
             angle: -0.75
         };
+        this.heroRotation = 0;
 
         // Adaptive animation configuration
         this.swingDirection = -1;
@@ -58,6 +68,16 @@ export class SuperheroFX {
             maxDuration: 2.8
         };
 
+        // Special action configuration
+        this.specialAction = null;
+
+        this.specialActionSettings = {
+            minInterval: 4,
+            maxInterval: 6
+        };
+
+        this.nextSpecialAction = this.getRandomInterval();
+
         // Lifecycle states
         this.isDestroyed = false;
         this.isReady = false;
@@ -66,12 +86,26 @@ export class SuperheroFX {
         this.ready = this.initialize();
     }
 
+    // Generate a random number within a range
+    getRandom(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    // Generate a random whole-number interval
+    getRandomInterval() {
+        return Math.floor(
+            this.getRandom(
+                this.specialActionSettings.minInterval,
+                this.specialActionSettings.maxInterval + 1
+            )
+        );
+    }
+
     // Initialize superhero and its components
     async initialize() {
         try {
             this.hero = await createCharacter();
 
-            // Stop if instance was destroyed during loading
             if (this.isDestroyed) {
                 return;
             }
@@ -96,7 +130,6 @@ export class SuperheroFX {
                 0
             );
 
-            // Apply theme tether color
             this.tether.setColor(this.theme.tether);
 
             // Calculate initial layout
@@ -150,11 +183,6 @@ export class SuperheroFX {
         });
     }
 
-    // Generate a random number within a range
-    getRandom(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-
     // Calculate responsive layout
     updateLayout() {
         const width = this.container.clientWidth;
@@ -188,8 +216,8 @@ export class SuperheroFX {
             Math.min(
                 width * 0.3,
                 250,
-                horizontalSpace / Math.sin(0.75),
-                verticalSpace / Math.cos(0.75)
+                horizontalSpace / Math.sin(0.85),
+                verticalSpace / Math.cos(0.85)
             )
         );
 
@@ -201,13 +229,17 @@ export class SuperheroFX {
 
         this.tether.resize(width, height);
 
-        // Update superhero position
         this.updateSwing();
     }
 
     // Update superhero and tether positions
     updateSwing() {
-        if (!this.hero || !this.tether) {
+        if (
+            !this.hero ||
+            !this.tether ||
+            this.anchorX === undefined ||
+            this.ropeLength === undefined
+        ) {
             return;
         }
 
@@ -228,13 +260,36 @@ export class SuperheroFX {
         });
 
         // Rotate superhero SVG
-        gsap.set(this.hero.querySelector("svg"), {
-            rotation: this.swing.angle * 18,
-            transformOrigin: "50% 80%"
-        });
+        const svg = this.hero.querySelector("svg");
+
+        if (svg) {
+            gsap.set(svg, {
+                rotation: this.swing.angle * 18,
+                transformOrigin: "50% 80%"
+            });
+        }
 
         // Update tether endpoint
         this.tether.update(x, y);
+    }
+
+    // Select a random special action
+    triggerSpecialAction() {
+        const actions = [
+            "flip",
+            "quickSwing",
+            "hang"
+        ];
+
+        const randomIndex = Math.floor(
+            Math.random() * actions.length
+        );
+
+        this.specialAction = actions[randomIndex];
+
+        console.log(
+            `SuperheroFX: Special action - ${this.specialAction}`
+        );
     }
 
     // Start the next adaptive swing
@@ -248,7 +303,7 @@ export class SuperheroFX {
         // Alternate between left and right
         this.swingDirection *= -1;
 
-        // Generate a random swing angle
+        // Generate random swing angle
         const angle =
             this.swingDirection *
             this.getRandom(
@@ -256,7 +311,7 @@ export class SuperheroFX {
                 settings.maxAngle
             );
 
-        // Generate a random duration
+        // Generate random duration
         const duration =
             this.getRandom(
                 settings.minDuration,
@@ -281,7 +336,16 @@ export class SuperheroFX {
                 // Count completed swing movements
                 this.swingCount++;
 
-                // Start another adaptive swing
+                // Check if a special action is due
+                if (this.swingCount >= this.nextSpecialAction) {
+                    this.triggerSpecialAction();
+
+                    // Schedule the next special action
+                    this.nextSpecialAction =
+                        this.swingCount + this.getRandomInterval();
+                }
+
+                // Continue adaptive swinging
                 this.animateSwing();
             }
         });
@@ -311,11 +375,9 @@ export class SuperheroFX {
 
     // Pause animation
     stop() {
-        if (!this.animation) {
-            return;
+        if (this.animation) {
+            this.animation.pause();
         }
-
-        this.animation.pause();
     }
 
     // Destroy superhero and clean up resources
@@ -348,6 +410,12 @@ export class SuperheroFX {
         if (this.hero) {
             this.hero.remove();
             this.hero = null;
+        }
+
+        // Restore original container positioning
+        if (this.changedContainerPosition) {
+            this.container.style.position =
+                this.originalContainerPosition;
         }
 
         this.isReady = false;
