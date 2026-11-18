@@ -1,17 +1,33 @@
+
 import heroUrl from "./assets/hero.svg";
 
-export function createCharacter() {
-    const character = document.createElement("div");
+export async function createCharacter() {
+    const response = await fetch(heroUrl);
 
+    if (!response.ok) {
+        throw new Error(
+            "SuperheroFX: Failed to load character SVG."
+        );
+    }
+
+    const svgMarkup = await response.text();
+
+    const character = document.createElement("div");
     character.className = "sfx-character";
 
-    const image = document.createElement("img");
+    character.innerHTML = svgMarkup;
 
-    image.src = heroUrl;
-    image.alt = "R-Buddy superhero";
-    image.draggable = false;
+    const svg = character.querySelector("svg");
 
-    character.appendChild(image);
+    if (!svg) {
+        throw new Error(
+            "SuperheroFX: Invalid character SVG."
+        );
+    }
+
+    svg.setAttribute("width", "100%");
+    svg.setAttribute("height", "100%");
+    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
     return character;
 }
