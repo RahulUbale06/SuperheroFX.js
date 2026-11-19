@@ -1,7 +1,3 @@
-
-
-
-
 {
   "name": "superhero-fx",
   "version": "0.1.0",
@@ -35,10 +31,10 @@
   "author": "Rahul Ubale",
   "license": "MIT",
   "peerDependencies": {
-  "gsap": "^3.14.2"
-},
-"devDependencies": {
-  "gsap": "^3.14.2",
-  "vite": "^7.0.0"
-}
+    "gsap": "^3.14.2"
+  },
+  "devDependencies": {
+    "gsap": "^3.14.2",
+    "vite": "^7.0.0"
+  }
 }

@@ -1,25 +1,18 @@
 
 export function createTether(app, hero, anchorX, anchorY) {
+    const SVG_NS = "http://www.w3.org/2000/svg";
+
     // Create SVG container
-    const svg = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "svg"
-    );
+    const svg = document.createElementNS(SVG_NS, "svg");
 
     svg.classList.add("sfx-tether");
 
     // Create web path
-    const web = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path"
-    );
+    const web = document.createElementNS(SVG_NS, "path");
 
-    // Set initial SVG dimensions
+    // Set SVG dimensions
     function resize(width, height) {
-        svg.setAttribute(
-            "viewBox",
-            `0 0 ${width} ${height}`
-        );
+        svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
     }
 
     resize(app.clientWidth, app.clientHeight);
@@ -46,14 +39,35 @@ export function createTether(app, hero, anchorX, anchorY) {
         web.setAttribute("stroke", color);
     }
 
-    // Update web endpoint whenever superhero moves
-    function update(heroX, heroY) {
-        const handX = heroX + 45;
-        const handY = heroY - 20;
+    // Calculate actual hand position
+    function update() {
+        const characterSvg = hero.querySelector("svg");
 
+        if (!characterSvg) return;
+
+        const characterMatrix = characterSvg.getScreenCTM();
+        const tetherMatrix = svg.getScreenCTM();
+
+        if (!characterMatrix || !tetherMatrix) return;
+
+        // Right-hand attachment point in original SVG coordinates
+        const handPoint = characterSvg.createSVGPoint();
+
+        handPoint.x = 215;
+        handPoint.y = 190;
+
+        // Convert hand position to screen coordinates
+        const screenPoint = handPoint.matrixTransform(characterMatrix);
+
+        // Convert screen coordinates to tether SVG coordinates
+        const localPoint = screenPoint.matrixTransform(
+            tetherMatrix.inverse()
+        );
+
+        // Draw rope directly to the hand
         web.setAttribute(
             "d",
-            `M ${anchorX} ${anchorY} L ${handX} ${handY}`
+            `M ${anchorX} ${anchorY} L ${localPoint.x} ${localPoint.y}`
         );
     }
 

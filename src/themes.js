@@ -61,21 +61,54 @@ const themes = {
     }
 };
 
+const allowedColors = Object.keys(themes.classic);
+
+function isValidColor(value) {
+    if (typeof value !== "string") return false;
+
+    return CSS.supports("color", value);
+}
+
 export function resolveTheme(theme = "classic") {
+
     const config = typeof theme === "string"
         ? { preset: theme }
         : theme;
 
-    if (!config || typeof config !== "object") {
-        throw new Error("SuperheroFX: Invalid theme configuration.");
+    if (
+        !config ||
+        typeof config !== "object" ||
+        Array.isArray(config)
+    ) {
+        throw new Error(
+            "SuperheroFX: Invalid theme configuration."
+        );
     }
 
     const { preset = "classic", ...customColors } = config;
 
-    if (!themes[preset]) {
+    if (
+        typeof preset !== "string" ||
+        !Object.prototype.hasOwnProperty.call(themes, preset)
+    ) {
         throw new Error(
             `SuperheroFX: Unknown theme "${preset}".`
         );
+    }
+
+    for (const [key, value] of Object.entries(customColors)) {
+
+        if (!allowedColors.includes(key)) {
+            throw new Error(
+                `SuperheroFX: Unknown theme property "${key}".`
+            );
+        }
+
+        if (!isValidColor(value)) {
+            throw new Error(
+                `SuperheroFX: Invalid color value for "${key}".`
+            );
+        }
     }
 
     return {

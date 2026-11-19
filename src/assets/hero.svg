@@ -39,125 +39,201 @@
     </linearGradient>
   </defs>
 
-  <!-- Cape -->
-  <path d="M77 116 Q40 126 31 176 L13 258 Q53 238 91 267 L119 222 L157 264 Q190 193 159 119Z"
-        fill="url(#cape)" stroke="var(--sfx-outline)"
-        stroke-width="6" stroke-linejoin="round"/>
+  <!-- Animated Cape -->
+  <g id="sfx-cape">
+    <path d="M77 116 Q40 126 31 176 L13 258 Q53 238 91 267 L119 222 L157 264 Q190 193 159 119Z"
+          fill="url(#cape)"
+          stroke="var(--sfx-outline)"
+          stroke-width="6"
+          stroke-linejoin="round"/>
 
-  <!-- Cape highlight -->
-  <path d="M42 173 Q49 144 76 139 L56 229Z"
-        fill="var(--sfx-cape-highlight)" opacity=".5"/>
+    <path d="M42 173 Q49 144 76 139 L56 229Z"
+          fill="var(--sfx-cape-highlight)"
+          opacity=".5"/>
+  </g>
 
-  <!-- Left arm -->
-  <path d="M76 125 Q49 126 37 153 L23 185 Q29 199 44 193 L77 161Z"
-        fill="url(#redSuit)" stroke="var(--sfx-outline)"
-        stroke-width="6" stroke-linejoin="round"/>
+  <!-- Left Arm -->
+  <g id="sfx-left-arm">
+    <path d="M76 125 Q49 126 37 153 L23 185 Q29 199 44 193 L77 161Z"
+          fill="url(#redSuit)"
+          stroke="var(--sfx-outline)"
+          stroke-width="6"
+          stroke-linejoin="round"/>
 
-  <!-- Left glove -->
-  <path d="M23 181 Q9 187 16 204 Q29 215 44 194 L43 184Z"
-        fill="var(--sfx-accent)" stroke="var(--sfx-outline)"
-        stroke-width="5"/>
+    <path d="M23 181 Q9 187 16 204 Q29 215 44 194 L43 184Z"
+          fill="var(--sfx-accent)"
+          stroke="var(--sfx-outline)"
+          stroke-width="5"/>
+  </g>
 
-  <!-- Right arm -->
-  <path d="M158 125 Q185 127 198 153 L213 179 Q209 196 192 192 L157 160Z"
-        fill="url(#redSuit)" stroke="var(--sfx-outline)"
-        stroke-width="6" stroke-linejoin="round"/>
+  <!-- Right Arm -->
+  <g id="sfx-right-arm">
+    <path d="M158 125 Q185 127 198 153 L213 179 Q209 196 192 192 L157 160Z"
+          fill="url(#redSuit)"
+          stroke="var(--sfx-outline)"
+          stroke-width="6"
+          stroke-linejoin="round"/>
 
-  <!-- Right glove -->
-  <path d="M211 174 Q229 178 225 196 Q212 211 193 190 L195 180Z"
-        fill="var(--sfx-accent)" stroke="var(--sfx-outline)"
-        stroke-width="5"/>
+    <path d="M211 174 Q229 178 225 196 Q212 211 193 190 L195 180Z"
+          fill="var(--sfx-accent)"
+          stroke="var(--sfx-outline)"
+          stroke-width="5"/>
+  </g>
 
   <!-- Body -->
   <path d="M78 108 Q119 94 158 110 L174 188 Q118 218 62 188Z"
-        fill="url(#redSuit)" stroke="var(--sfx-outline)"
-        stroke-width="7" stroke-linejoin="round"/>
+        fill="url(#redSuit)"
+        stroke="var(--sfx-outline)"
+        stroke-width="7"
+        stroke-linejoin="round"/>
 
-  <!-- Shoulder armor -->
+  <!-- Shoulder Armor -->
   <path d="M72 119 Q85 106 99 111 L91 139 L65 146Z"
-        fill="var(--sfx-primary)" opacity=".75"/>
+        fill="var(--sfx-primary)"
+        opacity=".75"/>
 
   <path d="M162 119 Q150 106 137 111 L145 139 L169 146Z"
-        fill="var(--sfx-primary)" opacity=".65"/>
+        fill="var(--sfx-primary)"
+        opacity=".65"/>
 
-  <!-- Chest emblem plate -->
+  <!-- Chest Emblem Plate -->
   <path d="M119 124 L153 143 L143 179 L119 195 L95 179 L85 143Z"
-        fill="url(#blueSuit)" stroke="var(--sfx-outline)"
+        fill="url(#blueSuit)"
+        stroke="var(--sfx-outline)"
         stroke-width="4"/>
 
-  <!-- Lightning emblem -->
+  <!-- Lightning Emblem -->
   <path d="M124 135 L103 164 L118 164 L109 184 L139 151 L122 151Z"
-        fill="url(#gold)" stroke="var(--sfx-emblem)"
-        stroke-width="2" stroke-linejoin="round"/>
+        fill="url(#gold)"
+        stroke="var(--sfx-emblem)"
+        stroke-width="2"
+        stroke-linejoin="round"/>
 
   <!-- Waist -->
   <path d="M64 184 Q119 201 175 184 L173 204 Q119 225 66 204Z"
-        fill="url(#blueSuit)" stroke="var(--sfx-outline)"
+        fill="url(#blueSuit)"
+        stroke="var(--sfx-outline)"
         stroke-width="5"/>
 
-  <!-- Belt buckle -->
+  <!-- Belt Buckle -->
   <rect x="105" y="190" width="29" height="20"
-        rx="5" fill="url(#gold)"
-        stroke="var(--sfx-outline)" stroke-width="4"/>
+        rx="5"
+        fill="url(#gold)"
+        stroke="var(--sfx-outline)"
+        stroke-width="4"/>
 
   <!-- Neck -->
   <path d="M101 83 L138 83 L143 115 Q120 132 97 115Z"
-        fill="#EBAA7D" stroke="var(--sfx-outline)"
+        fill="#EBAA7D"
+        stroke="var(--sfx-outline)"
         stroke-width="5"/>
 
-  <!-- Head -->
-  <ellipse cx="120" cy="65" rx="45" ry="49"
-           fill="#F3BD91" stroke="var(--sfx-outline)"
-           stroke-width="6"/>
+  <!-- Complete Head Tracking Group -->
+  <g id="sfx-head">
 
-  <!-- Hair -->
-  <path d="M76 59 Q69 19 102 12 Q130 -2 153 17 Q170 32 163 60 L151 43 L140 29 L126 40 L109 27 L91 49Z"
-        fill="#22233B" stroke="var(--sfx-outline)"
-        stroke-width="6" stroke-linejoin="round"/>
+    <!-- Head -->
+    <ellipse cx="120" cy="65" rx="45" ry="49"
+             fill="#F3BD91"
+             stroke="var(--sfx-outline)"
+             stroke-width="6"/>
 
-  <!-- Mask -->
-  <path d="M76 54 Q120 31 164 54 L156 82 Q120 99 84 82Z"
-        fill="url(#blueSuit)" stroke="var(--sfx-outline)"
-        stroke-width="5" stroke-linejoin="round"/>
+    <!-- Hair -->
+    <path d="M76 59 Q69 19 102 12 Q130 -2 153 17 Q170 32 163 60 L151 43 L140 29 L126 40 L109 27 L91 49Z"
+          fill="#22233B"
+          stroke="var(--sfx-outline)"
+          stroke-width="6"
+          stroke-linejoin="round"/>
 
-  <!-- Mask highlights -->
-  <path d="M86 56 L113 63 L103 74Z" fill="#FFFFFF"/>
-  <path d="M127 63 L154 56 L137 74Z" fill="#FFFFFF"/>
+    <!-- Mask -->
+    <path d="M76 54 Q120 31 164 54 L156 82 Q120 99 84 82Z"
+          fill="url(#blueSuit)"
+          stroke="var(--sfx-outline)"
+          stroke-width="5"
+          stroke-linejoin="round"/>
 
-  <!-- Eyebrows -->
-  <path d="M87 51 L111 57" stroke="var(--sfx-outline)"
-        stroke-width="4" stroke-linecap="round"/>
-  <path d="M129 57 L153 51" stroke="var(--sfx-outline)"
-        stroke-width="4" stroke-linecap="round"/>
+    <!-- Left Eye -->
+    <g id="sfx-left-eye">
+      <path d="M86 56 L113 63 L103 74Z"
+            fill="#FFFFFF"/>
 
-  <!-- Smile -->
-  <path d="M105 94 Q120 104 135 94"
-        fill="none" stroke="#8B493A"
-        stroke-width="3" stroke-linecap="round"/>
+      <!-- Tapered Left Pupil -->
+      <path id="sfx-left-pupil"
+            d="M98 61
+               Q102 60 105 65
+               Q103 69 100 68
+               Q97 66 98 61Z"
+            fill="#17152E"/>
+    </g>
 
-  <!-- Left leg -->
+    <!-- Right Eye -->
+    <g id="sfx-right-eye">
+      <path d="M127 63 L154 56 L137 74Z"
+            fill="#FFFFFF"/>
+
+      <!-- Tapered Right Pupil -->
+      <path id="sfx-right-pupil"
+            d="M135 65
+               Q138 60 142 61
+               Q143 66 140 68
+               Q137 69 135 65Z"
+            fill="#17152E"/>
+    </g>
+
+    <!-- Left Eyebrow -->
+    <path id="sfx-left-eyebrow"
+          d="M87 51 L111 57"
+          fill="none"
+          stroke="var(--sfx-outline)"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <!-- Right Eyebrow -->
+    <path id="sfx-right-eyebrow"
+          d="M129 57 L153 51"
+          fill="none"
+          stroke="var(--sfx-outline)"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <!-- Smile -->
+    <path d="M105 94 Q120 104 135 94"
+          fill="none"
+          stroke="#8B493A"
+          stroke-width="3"
+          stroke-linecap="round"/>
+
+  </g>
+
+  <!-- Left Leg -->
   <path d="M70 204 L112 214 L94 260 L57 254Z"
-        fill="url(#blueSuit)" stroke="var(--sfx-outline)"
-        stroke-width="6" stroke-linejoin="round"/>
+        fill="url(#blueSuit)"
+        stroke="var(--sfx-outline)"
+        stroke-width="6"
+        stroke-linejoin="round"/>
 
-  <!-- Right leg -->
+  <!-- Right Leg -->
   <path d="M127 214 L169 202 L183 252 L146 261Z"
-        fill="url(#blueSuit)" stroke="var(--sfx-outline)"
-        stroke-width="6" stroke-linejoin="round"/>
+        fill="url(#blueSuit)"
+        stroke="var(--sfx-outline)"
+        stroke-width="6"
+        stroke-linejoin="round"/>
 
-  <!-- Left boot -->
+  <!-- Left Boot -->
   <path d="M57 244 L96 250 L94 273 L42 274 Q33 262 57 244Z"
-        fill="var(--sfx-accent)" stroke="var(--sfx-outline)"
+        fill="var(--sfx-accent)"
+        stroke="var(--sfx-outline)"
         stroke-width="5"/>
 
-  <!-- Right boot -->
+  <!-- Right Boot -->
   <path d="M146 250 L183 243 L202 270 L150 274Z"
-        fill="var(--sfx-accent)" stroke="var(--sfx-outline)"
+        fill="var(--sfx-accent)"
+        stroke="var(--sfx-outline)"
         stroke-width="5"/>
 
-  <!-- Boot details -->
+  <!-- Boot Details -->
   <path d="M49 261 L82 263 M161 263 L188 259"
         stroke="var(--sfx-emblem-dark)"
-        stroke-width="4" stroke-linecap="round"/>
+        stroke-width="4"
+        stroke-linecap="round"/>
 
 </svg>
